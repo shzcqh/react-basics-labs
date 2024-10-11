@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
 import Task from './components/Task';
-
 function App() {
   const [ taskState, setTaskState ] = useState({
     tasks: [
@@ -13,15 +12,13 @@ function App() {
   return (
     <div className="container">
       <h1>Tasky</h1>
-      <Task title="Laundry" deadline="Tomorrow">
-Fold laundry and put away
-      </Task>
-      <Task title="Dishes" deadline="Today" >
-      emptydishwasher
-        </Task>
-      <Task title="Laundry" deadline="Tomorrow" />
-      <Task title="Tidy" deadline="Today" />
-
+      {taskState.tasks.map((task) => (              
+    <Task 
+      title={task.title}
+      description={task.description}
+      deadline={task.deadline}
+    />
+  ))} 
     </div>
   );
 }
