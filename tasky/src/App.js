@@ -6,9 +6,9 @@ import Task from './components/Task';
 function App() {
   const [ taskState, setTaskState ] = useState({
     tasks: [
-      { id: 1, title:"Dishes", description: "Empty dishwasher", deadline: "Today", done: false },
-      { id: 2, title: "Laundry", description: "Fold clothes and put away", deadline: "Tomorrow", done: false },
-      { id: 3, title: "Tidy up", deadline: "Today", done: false}
+      { id: 1, title:"Dishes", description: "Empty dishwasher", deadline: "Today", done: false,priority:"Low" },
+      { id: 2, title: "Laundry", description: "Fold clothes and put away", deadline: "Tomorrow", done: false,priority:"Medium" },
+      { id: 3, title: "Tidy up", deadline: "Today", done: false,priority:"High"}
     ]
   });
   const doneHandler = (taskIndex) => {
@@ -25,7 +25,8 @@ function App() {
   const [ formState, setFormState ] = useState({
     title: "",
     description: "",
-    deadline: ""
+    deadline: "",
+    priority: "Low" 
   });
   const formChangeHandler = (event) => {
     let form = {...formState};
@@ -40,6 +41,8 @@ function App() {
       case "deadline":
           form.deadline = event.target.value;
           break;
+      case "priority":
+        form.priority =event.target.value;
       default:
           form = formState;
     }
@@ -56,6 +59,17 @@ function App() {
     tasks.push(form);
     setTaskState({tasks});
   }
+  const getPriorityClass = (priority) => {
+    switch (priority) {
+      case "High":
+        return "high-priority";
+      case "Medium":
+        return "medium-priority";
+      case "Low":
+      default:
+        return "low-priority";
+    }
+  };
   return (
     <div className="container">
       <h1>Tasky</h1>
@@ -67,7 +81,9 @@ function App() {
       deadline={task.deadline}
       key={task.id}
       done={task.done}
+      priority={task.priority}
       markDone={() => doneHandler(index)}
+      className={getPriorityClass(task.priority)} 
     />
   ))}
   <AddTaskForm change={formChangeHandler} submit={formSubmitHandler} />

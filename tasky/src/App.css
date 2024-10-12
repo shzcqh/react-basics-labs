@@ -86,3 +86,13 @@ form {
   width: 50%;
   margin: auto;
 }
+.low-priority {
+  background-color: #27bf27 !important; 
+}
+.medium-priority {
+  background-color: #a38831 !important; 
+}
+
+.high-priority {
+  background-color: #c01725 !important; 
+}
